@@ -1,0 +1,15 @@
+# --- Dépendances principales ---------------------------------------------
+# PyTorch : pour le GPU, installez de préférence la version CUDA adaptée
+# AVANT ce fichier (voir README, ex. --index-url https://download.pytorch.org/whl/cu124).
+torch>=2.6
+# TransformerLens : Qwen3 pris en charge à partir de 2.16.0 ;
+# HookedTransformer SUPPRIMÉ en 4.0 -> on reste sous 4.0.
+transformer_lens>=2.16.0,<4.0
+# transformers : architecture Qwen3 disponible à partir de 4.51.
+transformers>=4.51
+numpy>=1.26
+# accélère/allège le chargement des gros modèles (low_cpu_mem_usage)
+accelerate>=0.26
+
+# --- Optionnel (V2 : interface interactive) --------------------------------
+# streamlit>=1.30

@@ -1,0 +1,35 @@
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Caches Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Poids de modèles et caches Hugging Face (ne jamais versionner)
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+models/
+checkpoints/
+.cache/
+hf_cache/
+
+# Exports (activations JSON, figures)
+exports/
+*.npy
+*.npz
+
+# Divers
+.env
+.DS_Store
+.streamlit/secrets.toml
