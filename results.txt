@@ -1,0 +1,62 @@
+Loaded pretrained model Qwen/Qwen3-4B into HookedTransformer
+==================================================================
+ ARCHITECTURE DU MODÈLE
+==================================================================
+  Modèle                               : Qwen3-4B
+  Nombre de couches (n_layers)         : 36
+  Dimension du flux résiduel (d_model) : 2560
+  Neurones MLP par couche (d_mlp)      : 9728
+  Têtes d'attention (n_heads)          : 32
+  Têtes clé/valeur (GQA)               : 8
+  Dimension par tête (d_head)          : 128
+  Taille du vocabulaire (d_vocab)      : 151936
+  Contexte maximal (n_ctx)             : 2048
+  Fonction d'activation                : silu
+  Normalisation                        : RMSPre
+  Encodage positionnel                 : rotary
+  MLP à porte (SwiGLU)                 : True
+  Type de bloc                         : TransformerBlock
+  Type d'attention                     : GroupedQueryAttention
+  Type de MLP                          : GatedMLP
+  Nombre de paramètres                 : 4 412 145 024  (~4.41 milliards)
+  Type des poids                       : torch.float16
+  Périphérique                         : cuda
+------------------------------------------------------------------
+  Structure d'un bloc : entrée -> Norme -> Attention -> (+) -> Norme -> MLP -> (+) -> sortie
+  Neurones MLP au total : 350 208
+==================================================================
+
+Concept analysé : « Bible » — couche 18
+Tokens : [' Bible']
+  - resid_pre  forme = (2, 2560)
+  - resid_post forme = (2, 2560)
+  - attn_out   forme = (2, 2560)
+  - pattern    forme = (32, 2, 2)
+  - mlp_post   forme = (2, 9728)
+
+Top 10 neurones MLP les plus activés (moyenne sur les tokens) :
+    1. L18N2807   valeur = +0.9089
+    2. L18N351    valeur = +0.8809
+    3. L18N3471   valeur = +0.5572
+    4. L18N1309   valeur = +0.4729
+    5. L18N0      valeur = +0.4592
+    6. L18N2534   valeur = +0.4313
+    7. L18N129    valeur = +0.4296
+    8. L18N232    valeur = +0.3929
+    9. L18N3050   valeur = +0.3807
+   10. L18N3914   valeur = +0.3764
+
+Top 10 neurones les plus similaires (cosinus, directions W_out) :
+    1. L18N7094   valeur = +0.0698
+    2. L18N8199   valeur = +0.0677
+    3. L18N965    valeur = +0.0665
+    4. L18N7409   valeur = +0.0653
+    5. L18N8289   valeur = +0.0649
+    6. L18N6816   valeur = +0.0639
+    7. L18N6413   valeur = +0.0631
+    8. L18N102    valeur = +0.0630
+    9. L18N4179   valeur = +0.0625
+   10. L18N7791   valeur = +0.0617
+
+Process finished with exit code 0
+

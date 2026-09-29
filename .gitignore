@@ -33,3 +33,4 @@ exports/
 .env
 .DS_Store
 .streamlit/secrets.toml
+token.env
