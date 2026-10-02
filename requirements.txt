@@ -11,5 +11,9 @@ numpy>=1.26
 # accélère/allège le chargement des gros modèles (low_cpu_mem_usage)
 accelerate>=0.26
 
-# --- Optionnel (V2 : interface interactive) --------------------------------
+# --- Interface graphique web (app/server.py) ---------------------------------
+fastapi>=0.110
+uvicorn>=0.29
+
+# --- Optionnel (V2 : interface Streamlit, commentée) ----------------------------
 # streamlit>=1.30

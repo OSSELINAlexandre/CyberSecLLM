@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>llm-visualizer — Inspection des couches</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%224%22 fill=%22%232b2d42%22/%3E%3Crect x=%223%22 y=%223%22 width=%2210%22 height=%223%22 fill=%22%23fde6cc%22/%3E%3Crect x=%223%22 y=%227%22 width=%2210%22 height=%223%22 fill=%22%23e8e1fb%22/%3E%3Crect x=%223%22 y=%2211%22 width=%2210%22 height=%222%22 fill=%22%23dcf3e7%22/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="entete">
+    <div class="entete__titre">
+      <span class="logo" aria-hidden="true"></span>
+      <div>
+        <h1>llm-visualizer</h1>
+        <p class="sous-titre">Inspection des couches d'un modèle de langage, une phrase à la fois.</p>
+      </div>
+    </div>
+    <span id="etat-serveur" class="pastille pastille--attente">Connexion au serveur…</span>
+  </header>
+
+  <main>
+    <!-- 1. Architecture du modèle -->
+    <section class="section" aria-labelledby="titre-architecture">
+      <h2 id="titre-architecture">Architecture du modèle</h2>
+      <div id="cartes-architecture" class="cartes"><p class="discret">Chargement…</p></div>
+    </section>
+
+    <!-- 2. Saisie -->
+    <section class="section">
+      <h2>Phrase à analyser</h2>
+      <form id="formulaire" class="formulaire" autocomplete="off">
+        <textarea id="texte" rows="2" maxlength="2000"
+          placeholder="Ex. : Au commencement était le Verbe, et le Verbe était avec Dieu.">Au commencement était le Verbe, et le Verbe était avec Dieu.</textarea>
+        <div class="formulaire__ligne">
+          <label class="champ-k">Top-k neurones
+            <input id="top-k" type="number" min="1" max="100" value="10">
+          </label>
+          <button id="bouton-lancer" type="submit" class="bouton">
+            <span class="bouton__texte">Lancer</span>
+            <span class="roue" aria-hidden="true"></span>
+          </button>
+        </div>
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- 3. Résultats -->
+    <section id="resultats" class="section cache" aria-live="polite">
+      <h2>Tokens</h2>
+      <div id="tokens" class="tokens"></div>
+      <p id="durees" class="discret"></p>
+
+      <div class="titre-avec-options">
+        <h2>Carte d'activation</h2>
+        <div class="options">
+          <label>Mesure
+            <select id="mesure">
+              <option value="norme_residuel">Norme du flux résiduel</option>
+              <option value="norme_attn">Norme de la sortie d'attention</option>
+              <option value="magnitude_mlp">Magnitude moyenne du MLP</option>
+            </select>
+          </label>
+          <label>Échelle
+            <select id="echelle-carte">
+              <option value="globale">Commune à toute la carte</option>
+              <option value="couche">Par couche (ligne)</option>
+            </select>
+          </label>
+          <label class="case"><input id="exclure-premier" type="checkbox" checked>
+            Exclure le 1er token de l'échelle</label>
+        </div>
+      </div>
+      <p class="discret">Lignes : couches (de la première à la dernière) · colonnes : tokens.
+        Plus la case est foncée, plus l'activation est forte. L'échelle « par couche » fait ressortir les différences entre tokens à l'intérieur d'une même couche.</p>
+      <div id="carte" class="carte"></div>
+
+      <h2>Pile des couches</h2>
+      <p class="discret">Le texte descend dans la pile : chaque bloc contient une sous-couche
+        d'attention et une sous-couche MLP, dont la couleur reflète l'intensité moyenne.
+        Cliquez sur une couche pour voir ses neurones et ses têtes d'attention.</p>
+      <div id="pile" class="pile"></div>
+    </section>
+  </main>
+
+  <footer class="pied">llm-visualizer · TransformerLens · tout fonctionne hors ligne</footer>
+  <script src="app.js"></script>
+</body>
+</html>
